@@ -1,14 +1,27 @@
 <template>
   <div
-    class="flex flex-row items-center justify-center gap-2 pt-5 absolute bottom-10 left-[50%] translate-x-[-50%] w-[50%] h-[100px]"
+    class="flex flex-row items-center justify-center gap-2 pt-5 w-[56vw] h-[100px] max-w-[1280px]"
   >
     <div
-      class="w-[20%] bg-[#282828] border-5 border-[#323232] h-full rounded-[12px]"
+      class="w-[40%] bg-[#282828] border-4 border-[#323232] h-full rounded-[12px] p-1 flex flex-row gap-2 relative"
     >
-      <img :src="currentMusicCover" alt="" class="w-10" />
+      <img :src="currentMusicCover" alt="" class="h-full rounded-[8px]" />
+      <div class="flex flex-col pt-2 gap-">
+        <p class="text-white font-alexandria text-[14px]">
+          {{ currentMusic?.title }}
+        </p>
+        <p class="text-gray-400 font-alexandria text-[12px]">
+          {{ currentMusic?.artist }}
+        </p>
+        <p
+          class="text-gray-400 font-alexandria text-[12px] absolute bottom-2 right-2"
+        >
+          {{ formatTime(duration) }}
+        </p>
+      </div>
     </div>
     <div
-      class="w-[80%] p-3 bg-[#282828] h-full rounded-[12px] border-5 border-[#323232] flex flex-col items-center justify-center"
+      class="w-[60%] p-3 bg-[#282828] h-full rounded-[12px] border-4 border-[#323232] flex flex-col items-center justify-center"
     >
       <div
         class="w-full max-h-[80%] rounded-[12px] flex justify-center items-center"
@@ -77,6 +90,10 @@ const seekTime = ref(0);
 const isSeeking = ref(false);
 const duration = ref(0);
 const currentMusicCover = ref("");
+const currentMusic = ref({
+  title: "",
+  artist: "",
+});
 
 const formatTime = (time) => {
   if (!time) return "00:00";
@@ -117,16 +134,17 @@ const onLoadedMetadata = () => {
 };
 
 setInterval(() => {
-  const currentMusic = JSON.parse(localStorage.getItem("currentMusic"));
+  const storedMusic = JSON.parse(localStorage.getItem("currentMusic"));
   const storedPlaying = localStorage.getItem("isPlaying");
 
-  if (currentMusic) {
-    if (currentMusic.url !== lastMusic.value) {
-      lastMusic.value = currentMusic.url;
-      currentMusicCover.value = currentMusic.cover;
+  if (storedMusic) {
+    if (storedMusic.url !== lastMusic.value) {
+      lastMusic.value = storedMusic.url;
+      currentMusicCover.value = storedMusic.cover;
+      currentMusic.value = storedMusic;
       progress.value = 0;
       if (audio.value) {
-        audio.value.src = currentMusic.url;
+        audio.value.src = storedMusic.url;
       }
     }
 

@@ -4,15 +4,12 @@ import play from "../assets/play.svg";
 import fav from "../assets/love.svg";
 import { ref } from "vue";
 
-const musicList = ref([]);
-
-axios
-  .get("http://localhost:8000/get-music", {
-    headers: { "Access-Control-Allow-Origin": "*" },
-  })
-  .then((response) => {
-    musicList.value = response.data;
-  });
+const { musicLists } = defineProps({
+  musicLists: {
+    type: Array,
+    required: true,
+  },
+});
 
 const formatTitle = (title) => {
   if (title.length > 20) {
@@ -26,15 +23,9 @@ const formatDuration = (ms) => {
   return new Date(ms).toISOString().slice(14, 19);
 };
 
-const playMusic = (url, cover, title, artist, duration) => {
-  const currentMusic = {
-    url,
-    cover,
-    title,
-    artist,
-    duration,
-  };
-  localStorage.setItem("currentMusic", JSON.stringify(currentMusic));
+const playMusic = (music, index) => {
+  const musicList = { music, currentIndex: index };
+  localStorage.setItem("Music", JSON.stringify(musicList));
   localStorage.setItem("isPlaying", "true");
 };
 
@@ -48,7 +39,7 @@ const togglePlay = () => {
 <template>
   <div class="flex flex-col gap-[2px]">
     <div
-      v-for="music in musicList"
+      v-for="music in musicLists"
       :key="music.id"
       class="flex flex-row items-center cursor-pointer hover:bg-[#212121] p-[7px] rounded-[12px] transition-all duration-100 group"
     >
@@ -83,15 +74,7 @@ const togglePlay = () => {
             width="16px"
           />
           <img
-            @click="
-              playMusic(
-                music.play_url,
-                music.cover,
-                music.title,
-                music.artist,
-                music.duration,
-              )
-            "
+            @click="playMusic(musicLists, musicLists.indexOf(music))"
             :src="play"
             class="opacity-0 group-hover:opacity-100 transition-opacity brightness-80"
             width="13px"

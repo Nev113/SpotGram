@@ -1,5 +1,17 @@
 <script setup>
 import MusicList from "./MusicList.vue";
+import axios from "axios";
+import { ref } from "vue";
+
+const musicList = ref([]);
+
+axios
+  .get("http://localhost:8000/get-music", {
+    headers: { "Access-Control-Allow-Origin": "*" },
+  })
+  .then((response) => {
+    musicList.value = response.data;
+  });
 </script>
 
 <template>
@@ -14,7 +26,7 @@ import MusicList from "./MusicList.vue";
       <div
         class="overflow-y-scroll px-1 h-[300px] scrollbar rounded-[12px] scrollbar-track-transparent scrollbar-thumb-[#00000]"
       >
-        <MusicList />
+        <MusicList v-if="musicList.length > 0" :musicLists="musicList" />
       </div>
     </div>
     <div class="p-2 flex gap-3 flex-col bg-[#450500]">
@@ -22,6 +34,11 @@ import MusicList from "./MusicList.vue";
         <h2 class="akshar-header text-[20px] text-[#ffc7c7]">Lagu Favorit</h2>
         <p class="text-[#ffc7c7] text-[16px] font-['akshar'] opacity-70">
           Lagu Yang Kamu Suka
+        </p>
+      </div>
+      <div class="w-full h-full flex items-center justify-center">
+        <p class="text-[14px] font-alexandria font-bold text-[#ffc7c7]">
+          Belum ada lagu favorit
         </p>
       </div>
     </div>

@@ -125,6 +125,13 @@ const nextSong = () => {
   playMusic(music, currentMusicIndex.value);
 };
 
+const formatTitle = (title) => {
+  if (title.length > 20) {
+    return title.slice(0, 20) + "...";
+  }
+  return title;
+};
+
 const musicUndo = () => {
   const { music, currentIndex } = JSON.parse(localStorage.getItem("Music"));
   if (isShuffle.value) {
@@ -152,6 +159,8 @@ const musicEnded = () => {
   if (isShuffle.value) {
     shuffleMusicList();
     currentMusicIndex.value = currentIndex;
+  } else if (isRepeat.value == 2) {
+    return;
   } else {
     currentMusicIndex.value = currentIndex + 1;
   }
@@ -188,10 +197,10 @@ const togglePlay = () => {
       <img :src="currentMusicCover" alt="" class="h-full rounded-[8px]" />
       <div class="flex flex-col pt-2 gap-2">
         <p class="text-white font-alexandria text-[14px]">
-          {{ currentMusic?.title }}
+          {{ formatTitle(currentMusic?.title) }}
         </p>
         <p class="text-gray-400 font-alexandria text-[12px]">
-          {{ currentMusic?.artist }}
+          {{ formatTitle(currentMusic?.artist) }}
         </p>
         <p
           class="text-gray-400 font-alexandria text-[12px] absolute bottom-2 right-2"

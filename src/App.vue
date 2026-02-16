@@ -8,7 +8,9 @@ import Navbar from "./components/Navbar.vue";
     class="text-3xl font-normal font-sans min-w-[56vw] max-h-screen overflow-hidden"
   >
     <Navbar />
-    <router-view />
+    <div class="max-h-screen overflow-y-scroll scrollbar">
+      <router-view />
+    </div>
     <AudioPlayer />
   </main>
 </template>

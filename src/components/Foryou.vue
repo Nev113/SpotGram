@@ -1,17 +1,19 @@
 <script setup>
 import MusicList from "./MusicList.vue";
-import axios from "axios";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import { getData, URL_API } from "../functions/routing";
 
 const musicList = ref([]);
+const favMusicList = ref([]);
 
-axios
-  .get("http://localhost:8000/get-music", {
-    headers: { "Access-Control-Allow-Origin": "*" },
-  })
-  .then((response) => {
-    musicList.value = response.data;
-  });
+const updateFavList = () => {
+  favMusicList.value = JSON.parse(localStorage.getItem("FavMusic")) || [];
+};
+
+onMounted(() => {
+  updateFavList();
+  musicList.value = getData(URL_API + "/get-music");
+});
 </script>
 
 <template>
@@ -26,7 +28,11 @@ axios
       <div
         class="overflow-y-scroll px-1 h-[300px] scrollbar rounded-[12px] scrollbar-track-transparent scrollbar-thumb-[#00000]"
       >
-        <MusicList v-if="musicList.length > 0" :musicLists="musicList" />
+        <MusicList
+          v-if="musicList.length > 0"
+          :musicLists="musicList"
+          @updateFav="updateFavList"
+        />
       </div>
     </div>
     <div class="p-2 flex gap-3 flex-col bg-[#450500]">
@@ -36,7 +42,21 @@ axios
           Lagu Yang Kamu Suka
         </p>
       </div>
-      <div class="w-full h-full flex items-center justify-center">
+      <div
+        class="w-full h-full flex flex-row max-h-[300px] scrollbar overflow-y-scroll"
+        v-if="favMusicList.length > 0"
+      >
+        <MusicList
+          :musicLists="favMusicList"
+          :isFav="true"
+          class="w-full"
+          @updateFav="updateFavList"
+        />
+      </div>
+      <div
+        v-else
+        class="w-full h-full flex flex-row justify-center items-center"
+      >
         <p class="text-[14px] font-alexandria font-bold text-[#ffc7c7]">
           Belum ada lagu favorit
         </p>

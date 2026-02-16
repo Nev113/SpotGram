@@ -2,6 +2,13 @@
 import logo from "@/assets/logo.svg";
 import love from "@/assets/love.svg";
 import search from "@/assets/search.svg";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+function handleSearch(event) {
+  router.push(`/search/${event.target.value}`);
+}
 </script>
 
 <template>
@@ -27,6 +34,7 @@ import search from "@/assets/search.svg";
         <img :src="search" width="18px" />
         <input
           type="text"
+          @keydown.enter="handleSearch"
           class="h-full w-[200px] p-[1px] px-1 text-[18px] text-neutral-400 placeholder:text-neutral-500 focus:outline-none placeholder:text-[18px] placeholder:margin-auto font-['Akshar']"
           placeholder="Cari Musik"
         />

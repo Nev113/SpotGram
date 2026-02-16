@@ -1,19 +1,23 @@
 <script setup>
-import axios from "axios";
+import unfav from "../assets/unfav.svg";
 import play from "../assets/play.svg";
 import fav from "../assets/love.svg";
 import { ref } from "vue";
 
-const { musicLists } = defineProps({
+const { musicLists, isFav } = defineProps({
   musicLists: {
     type: Array,
     required: true,
+  },
+  isFav: {
+    type: Boolean,
+    default: false,
   },
 });
 
 const formatTitle = (title) => {
   if (title.length > 20) {
-    return title.slice(0, 20) + "...";
+    return title.slice(0, 26) + "...";
   }
   return title;
 };
@@ -29,10 +33,28 @@ const playMusic = (music, index) => {
   localStorage.setItem("isPlaying", "true");
 };
 
-const isPlaying = ref(false);
+const emit = defineEmits(["updateFav"]);
 
-const togglePlay = () => {
-  isPlaying.value = !isPlaying.value;
+const favMusic = (music, unFav) => {
+  console.log("Tap!");
+  const favMusicList = JSON.parse(localStorage.getItem("FavMusic")) || [];
+
+  const index = favMusicList.findIndex((item) => item.id === music.id);
+
+  if (unFav) {
+    if (index !== -1) {
+      favMusicList.splice(index, 1);
+    }
+  } else {
+    if (index !== -1) {
+      favMusicList.splice(index, 1);
+    } else {
+      favMusicList.push(music);
+    }
+  }
+
+  localStorage.setItem("FavMusic", JSON.stringify(favMusicList));
+  emit("updateFav");
 };
 </script>
 
@@ -41,6 +63,7 @@ const togglePlay = () => {
     <div
       v-for="music in musicLists"
       :key="music.id"
+      @click="playMusic(musicLists, musicLists.indexOf(music))"
       class="flex flex-row items-center cursor-pointer hover:bg-[#212121] p-[7px] rounded-[12px] transition-all duration-100 group"
     >
       <div class="flex flex-row gap-2 items-center">
@@ -69,12 +92,21 @@ const togglePlay = () => {
       <div class="grow flex flex-row justify-end">
         <div class="flex flex-row gap-4 items-center pr-5">
           <img
+            v-if="!isFav"
             :src="fav"
             class="opacity-0 group-hover:opacity-100 transition-opacity brightness-40"
             width="16px"
+            @click="favMusic(music, false)"
           />
           <img
-            @click="playMusic(musicLists, musicLists.indexOf(music))"
+            v-if="isFav"
+            :src="unfav"
+            class="opacity-0 group-hover:opacity-100 transition-opacity brightness-40"
+            width="16px"
+            @click="favMusic(music, true)"
+          />
+          <img
+            @click.stop="playMusic(musicLists, musicLists.indexOf(music))"
             :src="play"
             class="opacity-0 group-hover:opacity-100 transition-opacity brightness-80"
             width="13px"

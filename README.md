@@ -1,38 +1,71 @@
-# SpotGram
+# 🎵 SpotGram
 
-This template should help get you started developing with Vue 3 in Vite.
+[![GitHub License](https://img.shields.io/github/license/Nev113/SpotGram?style=flat-square)](https://github.com/Nev113/SpotGram/blob/main/LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/Nev113/SpotGram?style=flat-square)](https://github.com/Nev113/SpotGram/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/Nev113/SpotGram?style=flat-square)](https://github.com/Nev113/SpotGram/issues)
 
-## Recommended IDE Setup
+**SpotGram** is a lightweight music streaming application designed for speed, efficiency, and a seamless user experience. Enjoy your favorite tracks without the overhead of heavy performance-draining apps.
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+---
 
-## Recommended Browser Setup
+## ✨ Key Features
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+- **Lightweight Experience:** Optimized resource usage for snappy performance on any device.
+- **Modern & Minimalist UI:** A clean, intuitive interface inspired by modern design trends.
+- **Fast Streaming:** Low-latency playback with minimal buffering.
+- **Smart Search:** Quickly find your favorite songs, artists, or albums.
+- **Responsive Design:** Fully compatible with desktop, tablet, and mobile browsers.
 
-## Customize configuration
+## 🚀 Tech Stack
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+This project is built using modern technologies to ensure scalability and performance:
 
-## Project Setup
+- **Frontend:** [e.g., React.js / Next.js]
+- **Styling:** [e.g., Tailwind CSS]
+- **Integrations:** Instagram API (Educational use) & Spotify Web API
+- **State Management:** [e.g., Zustand / Redux]
 
-```sh
-npm install
-```
+## 🛠️ Installation & Setup
 
-### Compile and Hot-Reload for Development
+1.  **Clone the Repository:**
 
-```sh
-npm run dev
-```
+    ```bash
+    git clone [https://github.com/Nev113/SpotGram.git](https://github.com/Nev113/SpotGram.git)
+    cd SpotGram
+    ```
 
-### Compile and Minify for Production
+2.  **Install Dependencies:**
 
-```sh
-npm run build
-```
+    ```bash
+    npm install
+    ```
+
+3.  **Environment Configuration:**
+    Create a `.env` file in the root directory and add your credentials:
+
+    ```env
+    NEXT_PUBLIC_CLIENT_ID=your_id_here
+    ```
+
+4.  **Start the Development Server:**
+    ```bash
+    npm run dev
+    ```
+
+## ⚠️ Disclaimer & Privacy
+
+This project utilizes the **Instagram API** strictly for **educational and learning purposes**.
+
+In compliance with the platform's **Code of Conduct (CoC)** and security best practices, the specific scripts and configurations for the Instagram API integration are **not included** in this public repository. This is to ensure the security of the application and to respect the privacy and terms of service of the API provider.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please fork the repository and create a pull request for any improvements.
+
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+
+**Developed with ❤️ by [Nevo Bias](https://github.com/Nev113)**

@@ -3,6 +3,7 @@ import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import MusicList from "../components/MusicList.vue";
 import Loading from "../components/Loading.vue";
+import { getData } from "../functions/routing";
 
 const searchResults = ref([]);
 const route = useRoute();
@@ -10,14 +11,8 @@ const route = useRoute();
 const searchMusic = async (query) => {
   if (!query) return;
   try {
-    const response = await fetch(
-      `http://localhost:8000/search-music?query=${query}`,
-      {
-        headers: { "Access-Control-Allow-Origin": "*" },
-      },
-    );
-    const data = await response.json();
-    searchResults.value = data;
+    const response = await getData("/search-music?query=" + query);
+    searchResults.value = response;
   } catch (error) {
     console.error("Search error:", error);
   }
@@ -34,9 +29,11 @@ watch(
 
 <template>
   <div
-    class="pt-10 min-h-[calc(100vh-250px)] max-h-[calc(100vh-250px)] overflow-y-scroll scrollbar"
+    class="min-h-[calc(100vh-250px)] max-h-[calc(100vh-250px)] overflow-y-scroll scrollbar"
   >
-    <MusicList v-if="searchResults.length > 0" :musicLists="searchResults" />
+    <div v-if="searchResults.length > 0">
+      <MusicList :musicLists="searchResults" />
+    </div>
     <div v-else class="flex justify-center items-center h-full">
       <Loading />
     </div>

@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const URL_API = process.env.URL_API;
+const URL_API = import.meta.env.VITE_URL_API;
 
-const getData = (url) => {
+const getData = async (path) => {
   try {
-    const response = axios.get(url, {
+    const response = await axios.get(URL_API + path, {
       headers: { "Access-Control-Allow-Origin": "*" },
     });
     return response.data;

@@ -189,28 +189,28 @@ const togglePlay = () => {
 
 <template>
   <div
-    class="flex flex-row items-center justify-center gap-2 pt-5 w-[56vw] h-[100px] max-w-[1280px]"
+    class="flex flex-col md:flex-row items-center justify-center gap-2 pt-5 w-full md:h-[100px] max-w-[1280px]"
   >
     <div
-      class="w-[40%] bg-[#282828] border-4 border-[#323232] h-full rounded-[12px] p-1 flex flex-row gap-2 relative"
+      class="w-full md:w-[40%] bg-[#282828] border-4 border-[#323232] md:h-full h-[60px] rounded-[12px] p-1 flex flex-row gap-2 relative"
     >
       <img :src="currentMusicCover" alt="" class="h-full rounded-[8px]" />
-      <div class="flex flex-col pt-2 gap-2">
-        <p class="text-white font-alexandria text-[14px]">
+      <div class="flex flex-col pt-2 md:gap-2 gap-0">
+        <p class="text-white font-alexandria text-[12px] md:text-[14px]">
           {{ formatTitle(currentMusic?.title) }}
         </p>
-        <p class="text-gray-400 font-alexandria text-[12px]">
+        <p class="text-gray-400 font-alexandria text-[10px] md:text-[12px]">
           {{ formatTitle(currentMusic?.artist) }}
         </p>
         <p
-          class="text-gray-400 font-alexandria text-[12px] absolute bottom-2 right-2"
+          class="text-gray-400 font-alexandria text-[10px] md:text-[12px] absolute bottom-2 right-2 md:block hidden"
         >
           Now Playing
         </p>
       </div>
     </div>
     <div
-      class="w-[60%] p-3 bg-[#282828] h-full rounded-[12px] border-4 border-[#323232] flex gap-1 flex-col items-center justify-center"
+      class="w-full h-full md:w-[60%] p-3 bg-[#282828] h-full rounded-[12px] border-4 border-[#323232] flex gap-1 flex-col items-center justify-center"
     >
       <div
         class="w-full max-h-[80%] rounded-[12px] flex gap-1 justify-center items-center"
@@ -255,7 +255,7 @@ const togglePlay = () => {
           @click="togglePlay"
           class="bg-[#474747] cursor-pointer rounded-[12px] p-2 w-[20%] h-full flex justify-center items-center"
         >
-          <img class="w-4" :src="isPlaying ? pause : play" alt="" />
+          <img class="w-6 md:w-4" :src="isPlaying ? pause : play" alt="" />
         </button>
         <button
           @click="nextSong"
@@ -297,7 +297,7 @@ const togglePlay = () => {
       <div
         class="w-[80%] w-full h-full rounded-[12px] flex flex-row items-center gap-2 relative"
       >
-        <p class="text-white text-[14px] font-alexandria">
+        <p class="text-white text-[12px] md:text-[14px] font-alexandria">
           {{ formatTime(currentTime) }}
         </p>
         <div class="relative w-full h-[5px] flex items-center">
@@ -320,7 +320,7 @@ const togglePlay = () => {
             step="0.1"
           />
         </div>
-        <p class="text-white text-[14px] font-alexandria">
+        <p class="text-white text-[12px] md:text-[14px] font-alexandria">
           {{ formatTime(duration) }}
         </p>
       </div>

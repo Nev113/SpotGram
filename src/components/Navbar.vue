@@ -1,6 +1,5 @@
 <script setup>
 import logo from "@/assets/logo.svg";
-import love from "@/assets/love.svg";
 import search from "@/assets/search.svg";
 import { useRouter } from "vue-router";
 
@@ -21,21 +20,13 @@ function handleSearch(event) {
     />
     <div class="flex flex-row gap-1">
       <div
-        class="rounded-[12px] bg-neutral-700 p-[2px] pb-[8px] cursor-pointer"
-        v-on:click="$router.push('/search')"
-      >
-        <div class="rounded-[9px] bg-neutral-800 p-3">
-          <img :src="love" width="16px" />
-        </div>
-      </div>
-      <div
         class="flex flex-row gap-1 rounded-[9px] bg-neutral-800 border-4 border-neutral-700 px-3"
       >
         <img :src="search" width="18px" />
         <input
           type="text"
           @keydown.enter="handleSearch"
-          class="h-full w-[200px] p-[1px] px-1 text-[18px] text-neutral-400 placeholder:text-neutral-500 focus:outline-none placeholder:text-[18px] placeholder:margin-auto font-['Akshar']"
+          class="h-full w-[160px] md:w-[200px] p-[1px] px-1 text-[18px] text-neutral-400 placeholder:text-neutral-500 focus:outline-none placeholder:text-[18px] placeholder:margin-auto font-['Akshar']"
           placeholder="Cari Musik"
         />
       </div>

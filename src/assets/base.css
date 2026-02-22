@@ -21,7 +21,5 @@ body {
   background-color: var(--color-background);
   font-family: "Akshar", sans-serif;
   color: var(--color-text);
-  max-width: 56vw;
   margin: auto;
-  margin-top: 40px;
 }

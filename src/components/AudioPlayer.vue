@@ -74,7 +74,10 @@ const onLoadedMetadata = () => {
 };
 
 setInterval(() => {
-  const { music, currentIndex } = JSON.parse(localStorage.getItem("Music"));
+  const storedMusic = localStorage.getItem("Music");
+  if (!storedMusic) return;
+
+  const { music, currentIndex } = JSON.parse(storedMusic);
   const storedPlaying = localStorage.getItem("isPlaying");
 
   if (music) {
@@ -110,7 +113,10 @@ setInterval(() => {
 }, 1000);
 
 const nextSong = () => {
-  const { music, currentIndex } = JSON.parse(localStorage.getItem("Music"));
+  const storedMusic = localStorage.getItem("Music");
+  if (!storedMusic) return;
+
+  const { music, currentIndex } = JSON.parse(storedMusic);
   if (isShuffle.value) {
     shuffleMusicList();
     currentMusicIndex.value = currentIndex;
@@ -133,7 +139,10 @@ const formatTitle = (title) => {
 };
 
 const musicUndo = () => {
-  const { music, currentIndex } = JSON.parse(localStorage.getItem("Music"));
+  const storedMusic = localStorage.getItem("Music");
+  if (!storedMusic) return;
+
+  const { music, currentIndex } = JSON.parse(storedMusic);
   if (isShuffle.value) {
     shuffleMusicList();
     currentMusicIndex.value = currentIndex;
@@ -155,7 +164,10 @@ const playMusic = (music, index) => {
 };
 
 const musicEnded = () => {
-  const { music, currentIndex } = JSON.parse(localStorage.getItem("Music"));
+  const storedMusic = localStorage.getItem("Music");
+  if (!storedMusic) return;
+
+  const { music, currentIndex } = JSON.parse(storedMusic);
   if (isShuffle.value) {
     shuffleMusicList();
     currentMusicIndex.value = currentIndex;
